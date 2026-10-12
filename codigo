@@ -1,4 +1,4 @@
-.data
+r.data
     vetor: .space 16             # Reserva 16 bytes na memoria (espaco para 4 inteiros de 4 bytes)
     msg_prompt: .asciiz "Digite um numero inteiro: "
     msg_out: .asciiz "Soma total: "
@@ -40,6 +40,8 @@ Loop_Leitura:
 
     # [ESCREVA AQUI: Calcular o offset na memoria multiplicando 'i' por 4 (use sll)]
     sll $t2, $t0, 2
+    add $t3, $s0, $t2        
+    sw  $t5, 0($t3)            
     
     # [ESCREVA AQUI: Somar offset ao endereco base ($s0) e salvar a soma no vetor (sw)]
     addi $t2, $t2, 4             # Avanca o ponteiro $t2 em 4 bytes
@@ -51,7 +53,7 @@ Fim_Leitura:
     # LACO 2: VARREDURA DO VETOR PARA SOMA TOTAL
     # ---------------------------------------------------------
     li $t0, 0         # Reseta o contador para o segundo laco (t0 = i = 0)
-    la $t2, 0         # Reseta o ponteiro para o inicio do vetor
+    la $t2, inicio         # Reseta o ponteiro para o inicio do vetor
     li $s1, 0         # Registrador para armazenar a Soma Total (s1 = 0)
 
 Loop_Soma:
