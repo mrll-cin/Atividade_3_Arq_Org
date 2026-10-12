@@ -1,5 +1,6 @@
 .data
     vetor: .space 16             # Reserva 16 bytes na memoria (espaco para 4 inteiros de 4 bytes)
+    msg_prompt: .asciiz "Digite um numero inteiro: "
     msg_out: .asciiz "Soma total: "
 
 .text
@@ -11,18 +12,37 @@ main:
     # LACO 1: LEITURA DOS PARES E PREENCHIMENTO DO VETOR
     # ---------------------------------------------------------
     li $t0, 0                    # $t0 = i (Contador do laco 1, comeca em 0)
+    li $t1, 4                    # limite de 4 iteracoes
+    la $t2, vetor                # endereco base
+
 Loop_Leitura:
     beq $t0, 4, Fim_Leitura      # Se i == 4, sai do laco
-    # [ESCREVA AQUI: Ler o 1s numero usando syscall 5]
-    
-    # [ESCREVA AQUI: Ler o 2s numero usando syscall 5]
-    
-    # [ESCREVA AQUI: Somar o 1s e o 2s n�mero]
-    
+    # [ESCREVA AQUI: Ler o n1 numero usando syscall 5]
+    li $v0, 4                    # Solicita numero par
+    la $a0, msg_prompt           # Le numero
+    syscall
+
+    li $v0, 5          # Le inteiro
+    syscall
+    move $t3, $v0      # Guarda em $t3
+
+    # [ESCREVA AQUI: Ler o n2 numero usando syscall 5]
+    li $v0, 4                   
+    la $a0, msg_prompt          
+    syscall
+
+    li $v0, 5         
+    syscall
+    move $t4, $v0     
+
+    # [ESCREVA AQUI: Somar o 1s e o 2s numero]
+    add $t5, $t3, $t4
+
     # [ESCREVA AQUI: Calcular o offset na memoria multiplicando 'i' por 4 (use sll)]
+    sw $t5, 0($t2)               # Store word: armazena no endereco apontado por $t2 o valor de $t5  
     
-    # [ESCREVA AQUI: Somar offset ao endere�o base ($s0) e salvar a soma no vetor (sw)]
-    
+    # [ESCREVA AQUI: Somar offset ao endereco base ($s0) e salvar a soma no vetor (sw)]
+    addi $t2, $t2, 4             # Avanca o ponteiro $t2 em 4 bytes
     addi $t0, $t0, 1             # Incrementa o contador (i++)
     j Loop_Leitura               # Volta para o inicio do laco
 
@@ -30,8 +50,10 @@ Fim_Leitura:
     # ---------------------------------------------------------
     # LACO 2: VARREDURA DO VETOR PARA SOMA TOTAL
     # ---------------------------------------------------------
-    li t0,0          #Resetaocontadorparaosegundola�o(t0 = i = 0)
-    li s1,0          #RegistradorparaarmazenaraSomaTotal(s1 = 0)
+    li $t0,0          # Reseta o contador para o segundo laco (t0 = i = 0)
+    la $t2, 0         # Reseta o ponteiro para o inicio do vetor
+    li $s1, 0         # Registrador para armazenar a Soma Total (s1 = 0)
+
 Loop_Soma:
     beq $t0, 4, Fim_Soma         # Se i == 4, sai do laco
     # [ESCREVA AQUI: Calcular o offset multiplicando 'i' por 4 novamente]
