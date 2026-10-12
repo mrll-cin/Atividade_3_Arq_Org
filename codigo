@@ -45,7 +45,6 @@ Fim_Leitura:
     # LACO 2: VARREDURA DO VETOR PARA SOMA TOTAL
     # ---------------------------------------------------------
     li $t0, 0         # Reseta o contador para o segundo laco (t0 = i = 0)
-    la $t2, vetor     # Reseta o ponteiro para o inicio do vetor
     li $s1, 0         # Registrador para armazenar a Soma Total (s1 = 0)
 
 Loop_Soma:
