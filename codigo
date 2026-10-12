@@ -1,4 +1,4 @@
-r.data
+.data
     vetor: .space 16             # Reserva 16 bytes na memoria (espaco para 4 inteiros de 4 bytes)
     msg_prompt: .asciiz "Digite um numero inteiro: "
     msg_out: .asciiz "Soma total: "
