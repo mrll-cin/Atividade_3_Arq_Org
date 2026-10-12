@@ -1,6 +1,6 @@
 .data
     vetor: .space 16             # Reserva 16 bytes na memoria (espaco para 4 inteiros de 4 bytes)
-    msg_prompt: .asciiz "Digite um numero inteiro: "
+    msg_prompt: .asciiz " "
     msg_out: .asciiz "Soma total: "
 
 .text
@@ -19,7 +19,6 @@ Loop_Leitura:
     beq $t0, 4, Fim_Leitura      # Se i == 4, sai do laco
     # [ESCREVA AQUI: Ler o n1 usando syscall 5]
     li $v0, 4                    # Solicita numero par
-    la $a0, msg_prompt           # Le numero
     syscall
 
     li $v0, 5          # Le inteiro
@@ -27,8 +26,7 @@ Loop_Leitura:
     move $t3, $v0      # Guarda em $t3
 
     # [ESCREVA AQUI: Ler o n2 usando syscall 5]
-    li $v0, 4                   
-    la $a0, msg_prompt          
+    li $v0, 4                            
     syscall
 
     li $v0, 5         
