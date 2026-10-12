@@ -66,15 +66,22 @@ Loop_Soma:
     
     addi $t0, $t0, 1             # Incrementa o contador (i++)
     j Loop_Soma                  # Volta para o inicio do laco
+
 Fim_Soma:
     # ---------------------------------------------------------
     # IMPRESSAO DO RESULTADO
     # ---------------------------------------------------------
     
     # [ESCREVA AQUI: Imprimir a string "Soma total: "]
-    
+    li $v0, 4
+    la $a0, msg_total
+    syscall
+
     # [ESCREVA AQUI: Imprimir o numero inteiro contido em $s1]
-    
+    li $v0, 1
+    move $a0, $s1
+    syscall
+
     # Encerra o simulador
     li $v0, 10
     syscall
