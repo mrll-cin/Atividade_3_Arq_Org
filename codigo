@@ -39,7 +39,7 @@ Loop_Leitura:
     add $t5, $t3, $t4
 
     # [ESCREVA AQUI: Calcular o offset na memoria multiplicando 'i' por 4 (use sll)]
-    sw $t5, 0($t2)               # Store word: armazena no endereco apontado por $t2 o valor de $t5  
+    sll $t2, $t0, 2
     
     # [ESCREVA AQUI: Somar offset ao endereco base ($s0) e salvar a soma no vetor (sw)]
     addi $t2, $t2, 4             # Avanca o ponteiro $t2 em 4 bytes
@@ -50,7 +50,7 @@ Fim_Leitura:
     # ---------------------------------------------------------
     # LACO 2: VARREDURA DO VETOR PARA SOMA TOTAL
     # ---------------------------------------------------------
-    li $t0,0          # Reseta o contador para o segundo laco (t0 = i = 0)
+    li $t0, 0         # Reseta o contador para o segundo laco (t0 = i = 0)
     la $t2, 0         # Reseta o ponteiro para o inicio do vetor
     li $s1, 0         # Registrador para armazenar a Soma Total (s1 = 0)
 
@@ -74,7 +74,7 @@ Fim_Soma:
     
     # [ESCREVA AQUI: Imprimir a string "Soma total: "]
     li $v0, 4
-    la $a0, msg_total
+    la $a0, msg_out
     syscall
 
     # [ESCREVA AQUI: Imprimir o numero inteiro contido em $s1]
