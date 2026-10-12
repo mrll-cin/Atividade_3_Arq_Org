@@ -28,13 +28,13 @@ Loop_Leitura:
     move $t4, $v0     
 
     # [ESCREVA AQUI: Somar o n1 e o n2]
-    add $t5, $t3, $t4
+    addu $t5, $t3, $t4
 
     # [ESCREVA AQUI: Calcular o offset na memoria multiplicando 'i' por 4 (use sll)]
     sll $t2, $t0, 2            
     
     # [ESCREVA AQUI: Somar offset ao endereco base ($s0) e salvar a soma no vetor (sw)]
-    add $t3, $s0, $t2        
+    addu $t3, $s0, $t2        
     sw  $t5, 0($t3)    
 
     addi $t0, $t0, 1             # Incrementa o contador (i++)
@@ -54,11 +54,11 @@ Loop_Soma:
     sll $t2, $t0, 2               # Desloca 2 bits a esquerda no endereço $t2, o que equivale a multiplicar i por 4
     
     # [ESCREVA AQUI: Somar offset ao endereco base ($s0) e ler o valor do vetor (lw)]
-    add $t3, $s0, $t2
+    addu $t3, $s0, $t2
     lw  $t4, 0($t3)
 
     # [ESCREVA AQUI: Acumular o valor lido na variavel de Soma Total ($s1)]
-    add $s1, $s1, $t4
+    addu $s1, $s1, $t4
     
     addi $t0, $t0, 1             # Incrementa o contador (i++)
     j Loop_Soma                  # Volta para o inicio do laco
@@ -81,5 +81,3 @@ Fim_Soma:
     # Encerra o simulador
     li $v0, 10
     syscall
-
-
