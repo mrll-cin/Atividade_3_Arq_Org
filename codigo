@@ -1,34 +1,34 @@
 .data
-    vetor: .space 16             # Reserva 16 bytes na mem�ria (espa�o para 4 inteiros de 4 bytes)
+    vetor: .space 16             # Reserva 16 bytes na memoria (espaco para 4 inteiros de 4 bytes)
     msg_out: .asciiz "Soma total: "
 
 .text
 .globl main
 main:
-    # Carrega o endere�o base do vetor no registrador $s0
+    # Carrega o endereco base do vetor no registrador $s0
     la $s0, vetor
     # ---------------------------------------------------------
     # LA�O 1: LEITURA DOS PARES E PREENCHIMENTO DO VETOR
     # ---------------------------------------------------------
-    li $t0, 0                    # $t0 = i (Contador do la�o 1, come�a em 0)
+    li $t0, 0                    # $t0 = i (Contador do laco 1, comeca em 0)
 Loop_Leitura:
     beq $t0, 4, Fim_Leitura      # Se i == 4, sai do la�o
-    # [ESCREVA AQUI: Ler o 1� n�mero usando syscall 5]
+    # [ESCREVA AQUI: Ler o 1s numero usando syscall 5]
     
-    # [ESCREVA AQUI: Ler o 2� n�mero usando syscall 5]
+    # [ESCREVA AQUI: Ler o 2s numero usando syscall 5]
     
-    # [ESCREVA AQUI: Somar o 1� e o 2� n�mero]
+    # [ESCREVA AQUI: Somar o 1s e o 2s n�mero]
     
-    # [ESCREVA AQUI: Calcular o offset na mem�ria multiplicando 'i' por 4 (use sll)]
+    # [ESCREVA AQUI: Calcular o offset na memoria multiplicando 'i' por 4 (use sll)]
     
     # [ESCREVA AQUI: Somar offset ao endere�o base ($s0) e salvar a soma no vetor (sw)]
     
     addi $t0, $t0, 1             # Incrementa o contador (i++)
-    j Loop_Leitura               # Volta para o in�cio do la�o
+    j Loop_Leitura               # Volta para o in�cio do laco
 
 Fim_Leitura:
     # ---------------------------------------------------------
-    # LA�O 2: VARREDURA DO VETOR PARA SOMA TOTAL
+    # LAcO 2: VARREDURA DO VETOR PARA SOMA TOTAL
     # ---------------------------------------------------------
     li t0,0          #Resetaocontadorparaosegundola�o(t0 = i = 0)
     li s1,0          #RegistradorparaarmazenaraSomaTotal(s1 = 0)
@@ -41,7 +41,7 @@ Loop_Soma:
     # [ESCREVA AQUI: Acumular o valor lido na vari�vel de Soma Total ($s1)]
     
     addi $t0, $t0, 1             # Incrementa o contador (i++)
-    j Loop_Soma                  # Volta para o in�cio do la�o
+    j Loop_Soma                  # Volta para o in�cio do laco
 Fim_Soma:
     # ---------------------------------------------------------
     # IMPRESS�O DO RESULTADO
